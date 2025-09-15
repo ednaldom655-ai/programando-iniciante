@@ -163,6 +163,6 @@ do
 }
 while (movimento != 1 && movimento != 2);
 printf("\n");
-// break;
+
  return 0;
 }
