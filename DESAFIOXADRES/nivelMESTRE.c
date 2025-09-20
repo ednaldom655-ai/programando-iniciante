@@ -1,6 +1,6 @@
 #include <stdio.h>
 // declarando as logica
-// -----TORRE------
+// -----TORRE/RAINHA------
 void movimentocima(int casa1)
 {
     if(casa1 > 0)
@@ -34,27 +34,42 @@ void movimentodireita(int casa4)
     }
 }
 // -----BISPO-----
-void movimentocimaesquerda(int casa1)
+void movimentocimadireita(int casa1)
 {
-    if(casa1 > 0)
-   {
-    printf("%d Cima/Esquerda. \n", casa1);
-    movimentocimaesquerda(casa1 - 1);//condição para terminar o loop
-   }
-}
-void movimentocimadireita(int casa2)
-{
-    if(casa2 > 0)
+  if (casa1 <= 0) return; //condição de parada do codigo
+  for(int direita = 0; direita <= 1; direita ++)
+  {
+    if (direita % 2 == 1)
     {
-    printf("%d Cima/Direita. \n", casa2);
-    movimentocimadireita(casa2 - 1);//condição para terminar o loop
-   }
+      printf("%d Cima. \n", casa1);
+    }
+    else
+    {
+      printf("%d Direita. \n", casa1);
+    }
+  }
+  movimentocimadireita(casa1 - 1);
 }
-//  declarando os comandos do jogo
-int main(){
-int movimentos;
 
-    printf("** JOGO DE XADRES ***\n");
+void movimentocimaesquerda(int casa2)
+{
+  if (casa2 <= 0) return;//condição de parada
+  for(int esquerda = 0; esquerda <= 1; esquerda ++)
+ {
+   if (esquerda % 2 == 1){
+    printf("%d Cima. \n", casa2);}
+   else{
+    printf("%d Esquerda. \n", casa2);}
+ }
+ movimentocimaesquerda(casa2 - 1);
+}
+
+
+int main(){
+  
+ int movimentos;
+
+    printf("** JOGO DE XADREZ ***\n");
     
 // -- TORRE --
 do{
@@ -88,12 +103,12 @@ printf("\n");
 
 // -- BISPO --
 do{
-int casa = 5;
+int casa = 3;
        printf("## BISPO ## \n");
-printf("Escolha o movimento do bispo.\n");
-printf("(1) Move-se cima/Direita.\n");
-printf("(2) Move-se cima/Equerda.\n");
-scanf("%d", &movimentos);
+     printf("Escolha o movimento do bispo.\n");
+     printf("(1) Move-se cima/Direita.\n");
+     printf("(2) Move-se cima/Esquerda.\n");
+     scanf("%d", &movimentos);
 
   if(movimentos == 1){
     movimentocimadireita(casa);}
@@ -105,7 +120,71 @@ scanf("%d", &movimentos);
     printf("OPÇÃO INVALIDA ! \n");
    }
  }while(movimentos != 1 && movimentos != 2);
-  
-    
-    return 0;
+printf("\n");
+
+//  --RAINHA--
+do {
+  int casa = 8;
+      printf("## RAINHA ## \n");
+    printf("Escolha um numero que represente o seu movimento. \n");
+    printf("Cima(8). \n");
+    printf("Baixo(2). \n");
+    printf("Esquerda(4). \n");
+    printf("Direita(6). \n");
+    scanf("%d", &movimentos);
+    printf("rainha move-se. \n");
+
+  if(movimentos == 8){
+    movimentocima(casa);
+  }
+  else if(movimentos == 2){
+    movimentobaixo(casa);
+  }
+  else if(movimentos == 4){
+    movimentoesquerda(casa);
+  }
+  else if(movimentos == 6){
+    movimentodireita(casa);
+  }
+  else{
+    printf("MOVIMENTO INVALIDO ! \n");
+  }
+}while (movimentos != 8 && movimentos != 2 && movimentos != 4 && movimentos != 6);
+printf("\n");
+
+// --CAVALO--
+do
+{ 
+    printf("## CAVALO ## \n");
+  printf("Escolha o numero que represente seu movimento. \n");
+  printf("(1)Cima/Direita. \n");
+  printf("(2)Cima/Esquerda. \n");
+  scanf("%d", &movimentos);
+  if(movimentos == 1)
+  {
+    for(int Direita = 0; Direita < 1; Direita ++)
+    {
+      for(int cima = 0; cima < 2; cima ++){
+        printf("%d Cima. \n", movimentos); 
+      }
+      printf("%d Direita. \n", movimentos);
+    }
+  }
+  else if(movimentos == 2)
+  {
+    for(int Esquerda = 0; Esquerda < 1; Esquerda ++)
+    {
+      for(int Cima = 0; Cima < 2; Cima ++){
+        printf("%d cima. \n", movimentos);
+      }
+      printf("%d Esquerda. \n", movimentos);
+    }
+  }
+  else
+  {
+    printf("OPÇÃO INVALIDA !\n");
+  }
+} while(movimentos != 1 && movimentos != 2);
+ 
+ return 0;
 }
